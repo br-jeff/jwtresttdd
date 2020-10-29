@@ -56,6 +56,23 @@ describe('Authentication' , () => {
         expetec(response.body).toHaveProperty("token")
     })
 
+    it('should be able to acess private routes when authenticated', async () => {
+        const user = await factory.create("User", {
+            password: '123'
+        })
+    
+        const response = await request(app)
+        .get('/dashboard')
+        .set('Authorization', `Bearer ${user.generateToken()}`)
+
+        expetec(response.status).toBe(200)
+    })
+
+    it('should not be able to acess private routes when not authenticated', async () => {
+         const response = await request(app).get('/dashboard')
+         expetec(response.status).toBe(401)
+    })
+
 
 })
 
