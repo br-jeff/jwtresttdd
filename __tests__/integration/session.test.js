@@ -45,8 +45,7 @@ describe('Authentication' , () => {
         const user = await factory.create("User", {
             password: '123'
         })
-       
-
+    
         const response = await request(app)
         .post('/sessions')
         .send({

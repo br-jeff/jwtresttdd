@@ -1,10 +1,11 @@
+const faker = require('faker')
 const {factory} = require('factory-girl')
 const { User } = require('../../src/app/models)
 
 factory.define('user', User, {
-    name: "teste",
-    email: "teste@teste.com",
-    password_hash: '123'
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    password_hash: faker.internet.password()
 })
 
 
