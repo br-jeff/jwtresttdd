@@ -2,7 +2,13 @@ const request = require('supertest')
 const {User}  = require('../../src/app/models')
 
 const app = require('../../src/app')
+const truncate = require('../utils/truncate')
+
+
 describe('Authentication' , () => {
+
+    beforeAll( async () => { await truncate })
+
     it('should recive JWT token when authenticated with valid credentials' , async () => {
         const user = await User.create({
             name: "teste",
@@ -12,7 +18,7 @@ describe('Authentication' , () => {
         console.log(user)
 
         const response = await request(app)
-        .post('/sessions').
+        .post('/sessions')
         .send({
             email: user_email,
             password: '123'
