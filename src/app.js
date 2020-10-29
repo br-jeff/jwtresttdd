@@ -1,3 +1,6 @@
+require('dotenv').config({
+    path: process.env.NODE_ENV == 'teste' ? '.env.test' : '.env'
+})
 const express = require('express')
 
 
